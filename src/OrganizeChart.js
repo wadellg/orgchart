@@ -14,9 +14,6 @@ class OrganizeChart extends Component {
     
     constructor(props){
         super(props);
-        this.state = {
-            leafCount: 0
-        };
     }
     
     // 递归生成节点
