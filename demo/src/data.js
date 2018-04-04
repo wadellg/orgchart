@@ -1,4 +1,4 @@
-{
+var data = {
     "name": "总公司",
     "children": [
         {
@@ -35,8 +35,14 @@
                 {
                     "name": "研发部",
                     "children": []
+                },
+                {
+                    "name": "测试部",
+                    "children": []
                 }
             ]
         }
     ]
-}
+};
+
+export default data;
