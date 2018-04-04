@@ -7,16 +7,21 @@ import PropTypes from 'prop-types';
 
 import './OrganizeChart.css';
 
+let leafCount = 0;
+
 // 主类
 class OrganizeChart extends Component {
-
+    
     constructor(props){
         super(props);
-
+        this.state = {
+            leafCount: 0
+        };
     }
     
     // 递归生成节点
     renderNodes(nodes = { children:[] }, key, lastKey){
+        
         // 横连接线
         let lineClass = 'line';
         let wapperClass = 'nodeWapper';
@@ -81,6 +86,11 @@ class OrganizeChart extends Component {
         const childNodes = nodes.children.map((item, index)=>{
             let { name, children } = item;  
             let isLast = (index === nodes.children.length -1);
+
+            if (nodes.children.length === 0) {
+                leafCount++;
+            }
+
             return this.renderNodes(item, index, isLast);
         });
 
@@ -118,10 +128,14 @@ class OrganizeChart extends Component {
 
     // 渲染render
     render() {
-        
+        // 计算最小宽度= 节点宽度 * 叶子数    默认最小宽度是100px
+        let nodeWidth = this.props.nodeStyle.width ? (this.props.nodeStyle.width+'').replace('px', '') - 0 : 100;
+
+        let minWidth =  nodeWidth * (leafCount? leafCount: 1);
+
         return (
-            <div className="container" style={ {minWidth: this.props.width + 'px' } } >
-                <div className="wapper"> 
+            <div className="container" style={ {width: this.props.width } }>
+                <div className="wapper" style={ {minWidth: minWidth + 'px' } }> 
                     { this.renderNodes(this.props.orgData) }
                 </div>
             </div>
@@ -133,7 +147,7 @@ class OrganizeChart extends Component {
 OrganizeChart.propType = {
     orgData: PropTypes.object.isRequired,
     orgNode: PropTypes.object,
-    width: PropTypes.number,
+    width: PropTypes.string,
     nodeStyle: PropTypes.object,
     line: PropTypes.object
 }
@@ -141,7 +155,7 @@ OrganizeChart.propType = {
 // 默认值
 OrganizeChart.defaultProps = {
     nodeStyle: {},
-    width: 800,
+    width: '800px',
     line: {
         width: 1,
         style: 'solid',

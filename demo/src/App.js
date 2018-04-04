@@ -20,6 +20,9 @@ class App extends Component {
   render() {
 
     let nodeStyle = {
+      // width: '100px',
+      // height: '40px',
+      // border: '1px solid'
     };
     let lineStyle = {
       width: '4px',
@@ -34,7 +37,7 @@ class App extends Component {
           <h1 className="App-title">欢迎使用Organize组件</h1>
         </header>
         <div className="App-intro">
-          <OrganizeChart orgData={ data } orgNode={ MyCom } width="500" nodeStyle={ nodeStyle } line={ lineStyle } />
+          <OrganizeChart orgData={ data } orgNode={ MyCom } width="500px" nodeStyle={ nodeStyle } line={ lineStyle } />
         </div>
       </div>
     );
