@@ -114,6 +114,9 @@ class OrganizeChart extends Component {
                     </div> 
                 }
                 { childNodes.length > 0 ? <div className='vLine' style={ vLineStyle }></div> : null }
+                { 
+                    //子节点对象  
+                }
                 { childNodes.length > 0 ? 
                     <div className="nodeChildren">
                         { childNodes }
